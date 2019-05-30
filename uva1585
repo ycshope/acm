@@ -1,0 +1,25 @@
+//STL版本
+#include<iostream>
+#include<string>
+using namespace std;
+int Score(string a);
+int main()
+{
+	int n;
+	string a;
+	cin>>n;
+	while(n--)										//这种写法比for(int i=0;i<n;i++)好 
+	{
+		cin>>a;
+		cout<<Score(a)<<endl;
+	}
+		
+}
+int Score(string a)
+{
+	int preonum=0,sum=0;											//前面O的数量 
+	for(string::iterator p=a.begin();p!=a.end();p++)
+		if(*p=='X')	preonum=0;								//			cout<<a[p];	无法识别  cout<<*p可以识别									 
+		else if(*p=='O') sum+=++preonum;
+	return sum;
+} 
