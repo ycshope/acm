@@ -1,0 +1,47 @@
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<cstring>
+using namespace std;
+bool ispalindrome(string ch);
+bool ismirrored(string ch);
+int main()
+{
+	//freopen("uva401.txt","w",stdout); 
+	string ch;
+	bool p,m;
+	const string msg[]={"not a palindrome.","a regular palindrome.","a mirrored string.","a mirrored palindrome."}; 
+	while(cin>>ch)
+	{
+		p=ispalindrome(ch);
+		m=ismirrored(ch);
+		//cout<<p<<endl;
+		//cout<<m<<endl;
+		cout<<ch<<" -- is ";
+		cout<<msg[m*2+p]<<"\n"<<endl;//这个用了位运算
+	}
+}
+//可将2个函数合到一起来写因为遍历部分是一样的，不同的只有判断部分 
+bool ispalindrome(string ch)
+{
+	string::iterator head,tail;		//string有从右向左的游标类型为reverse_iterator p，p++是向左移动。但类型和iterator无法比较 
+	for(head=ch.begin(),tail=ch.end()-1;tail>head;head++,tail--)
+		if(*head!=*tail) return false;
+	return true;
+}
+bool ismirrored(string ch)
+{
+	const char alphamir[]={"A   3  HIL JM O   2TUVWXY5"};
+	const char digitmir[]={"1SE Z  8 "};
+	string::iterator head,tail;	
+	for(head=ch.begin(),tail=ch.end()-1;tail>=head;head++,tail--)	//这里注意边界条件，tail>head对于1个字符而言会直接结束 
+		if(isalpha(*head))
+		{
+			if(alphamir[*head-'A']!=*tail) return false;	
+		}
+		else
+		{
+			if(digitmir[*head-'1']!=*tail) return false;
+		}
+	return true;
+} 
