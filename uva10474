@@ -1,0 +1,29 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<cstdio>
+using namespace std;
+int main()
+{
+	//freopen("uva10474.txt","w",stdout);
+	int tem,n,q,t=0;
+	while(cin>>n>>q&&n)
+	{
+		vector<int> mar;
+		while(n--)
+		{
+			cin>>tem;
+			mar.push_back(tem);
+		}
+		cout<<"CASE# "<<++t<<":"<<endl;
+		sort(mar.begin(),mar.end());
+		while(q--)
+		{
+			int wantmar;
+			cin>>wantmar;
+			int marplace=lower_bound(mar.begin(),mar.end(),wantmar)-mar.begin();
+			if(mar[marplace]==wantmar) cout<<wantmar<<" found at "<<marplace+1<<endl;
+			else  cout<<wantmar<<" not found"<<endl;
+		}
+	}
+}
