@@ -1,0 +1,51 @@
+//set的应用
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<set>			 
+using namespace std;
+void loradset(string ans,set<char> &slb);
+int hangman_judge(set<char> &slb,string q);
+int main()
+{
+	int r,t=1;
+	string ans,q,uans;
+	while((cin>>r)&&(r!=-1))
+	{
+		set<char> slb;
+		cin>>ans;
+		loradset(ans,slb);
+		cin>>q;
+		cout<<"Round "<<t++<<endl;
+		switch(hangman_judge(slb,q))
+		{
+		 	case -1:cout<<"You chickened out."<<endl; break;
+			case 0:cout<<"You lose."<<endl; break;
+			case 1:cout<<"You win."<<endl; break;
+		}
+	}
+	return 0; 
+}
+void loradset(string ans,set<char> &slb)
+{
+	for(int i=0;i<ans.size();i++)
+		if(slb.find(ans[i])==slb.end())	slb.insert(ans[i]);
+}
+int hangman_judge(set<char> &slb,string q)
+{
+	int chance=7;
+	set<char> tryed;
+	for(string::iterator p=q.begin();p!=q.end()&&chance;p++)
+	{
+		if(tryed.find(*p)!=tryed.end()) continue;
+		if(slb.find(*p)!=slb.end())
+			slb.erase(*p);
+		else
+			chance--;
+		if(slb.empty())
+			return 1;
+		tryed.insert(*p);
+	}
+	if(chance) return -1;
+	else return 0;	
+}
