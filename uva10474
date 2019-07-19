@@ -21,7 +21,8 @@ int main()
 		{
 			int wantmar;
 			cin>>wantmar;
-			int marplace=lower_bound(mar.begin(),mar.end(),wantmar)-mar.begin();
+			int marplace=lower_bound(mar.begin(),mar.end(),wantmar)-mar.begin(); 	
+			//lower_bound()负责返回有序容器的地址 -begin能够返回下标
 			if(mar[marplace]==wantmar) cout<<wantmar<<" found at "<<marplace+1<<endl;
 			else  cout<<wantmar<<" not found"<<endl;
 		}
