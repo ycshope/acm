@@ -1,0 +1,39 @@
+#include<iostream>
+#include<map>
+#include<cstdio>
+using namespace std;
+int arc_digit_generator(int i);
+int main()
+{
+	//freopen("uva1583.txt","w",stdout);
+	const int maxsize=100000;
+	map<int,int> digit_generator;	//digit_generator[i]表示i的生成元 
+	/*
+	int a;
+	while((cin>>a)&&a)
+		arc_digit_generator(a);
+		*/
+	for(int i=0;i<=maxsize;i++)	//计算arc_digit_generator(x)
+	{
+		int generated=arc_digit_generator(i);
+		if(generated<=maxsize&&digit_generator.find(generated)==digit_generator.end())
+			digit_generator[generated]=i;
+	}
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		cout<<digit_generator[n]<<endl;
+	}
+}
+int arc_digit_generator(int i)
+{
+	int sum=i;
+	while(i)
+	{
+		sum+=i%10;
+		i/=10;
+	}
+	return sum;
+} 
