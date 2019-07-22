@@ -1,0 +1,31 @@
+#include<iostream>
+#include<string>
+#include<cstdio> 
+using namespace std;
+string rotate_sequence(string s);
+int main()
+{
+	//freopen("uva1584.txt","w",stdout);
+	int T;
+	cin>>T; 
+	while(T--)
+	{
+		string s;
+		cin>>s;
+		int t=s.size()-1;
+		string minsequence=s,after_rotate_sequence=s;
+		while(t--)
+		{
+			after_rotate_sequence=rotate_sequence(after_rotate_sequence);
+			if(after_rotate_sequence<minsequence)	minsequence=after_rotate_sequence;	
+		}
+		cout<<minsequence<<endl;
+	}
+}
+string rotate_sequence(string s)
+{
+	string r;
+	r.append(s,s.size()-1,1);	//把字符串s中从pos开始的n个字符连接到当前字符串的结尾
+	r.append(s,0,s.size()-1);
+	return r;
+} 
