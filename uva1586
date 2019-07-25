@@ -1,0 +1,46 @@
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<cstring>
+using namespace std;
+float weight(char a);
+int main()
+{
+	//freopen("uva1586.txt","w",stdout);
+	int T;
+	string s;
+	cin>>T;
+	while(T--)
+	{
+		cin>>s;
+		float sum=0.0;
+		float mole_num;
+		for(string::reverse_iterator p=s.rbegin();p!=s.rend();p++) //		1.string::rbegin的用法   2，每轮结束都会计算一个元素的值 
+		{
+			mole_num=1;
+			if(isdigit(*p))											//数字位进行特殊处理	
+			{
+				mole_num=0.0;
+				for(float num=0.0,dec=1.0;isdigit(*p);p++,dec*=10.0)		//计算数字从低位到高位 ：num是每位数字的值， dec是权值 
+				{
+					num=*p-'0';
+					mole_num+=dec*num;
+				}
+			}
+			sum+=mole_num*weight(*p);
+			//cout<<*p<<" has "<<mole_num<<endl;
+		}
+		//cout<<sum<<endl;	
+		printf("%.3f\n",sum);         //c++目前的输出好像没有办法？
+	}
+}
+float weight(char a)
+{
+	switch(a)
+	{
+		case 'C': return 12.010; break;
+		case 'H': return 1.008;	break;
+		case 'O': return 16.000; break;
+		case 'N': return 14.010; break;
+	}
+}
