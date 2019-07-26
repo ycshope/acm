@@ -1,0 +1,33 @@
+#include<iostream>
+#include<string>
+#include<cstdio> 
+using namespace std;
+int main()
+{
+	//freopen("uva455.txt","w",stdout);
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		int str_length=0;
+		string str,min_periodic_str;
+		cin>>str;
+		while(1)
+		{
+			str_length++;
+			//cout<<"str_length is "<<str_length<<endl;
+			if(str.size()%str_length==0)
+			{
+				min_periodic_str=str.substr(0,str_length);	//string substr(int pos = 0,int n = npos) const;//返回pos开始的n个字符组成的字符串
+				//cout<<"min_periodic_str is "<<min_periodic_str<<endl;
+				int periodic_time=str.size()/str_length;
+				string mult_periodic_str;					//n次重复形成新串
+				while(periodic_time--) mult_periodic_str+=min_periodic_str;
+				//cout<<"mult_periodic_str is "<<mult_periodic_str<<endl;
+				if(mult_periodic_str==str) break;
+			}
+		}
+		cout<<str_length<<endl;
+		if(T) cout<<"\n";
+	}
+} 
